@@ -16,13 +16,14 @@ def main():
 @app.route("/todoist", methods=['POST'])
 def parse_request():
     data = request.json['event_data']
-    priority = data['priority']
-    project_id = data['project']
-    project_data = json.loads(r.get('https://todoist.com/API/v7/projects/get?token=' + TODOIST_USER_TOKEN + '&project_id=' + project_id).text)
-    project = project_data['project']['name']
-    url = nomie_api_head + 'push/' + NOMIE_API_KEY + '/action=track/label=' + project + '/value=' + priority
-    print url
-    r.get(url)
+    if data['event_name'] == 'item:completed':
+        priority = data['priority']
+        project_id = data['project_id']
+        project_data = json.loads(r.get('https://todoist.com/API/v7/projects/get?token=' + TODOIST_USER_TOKEN + '&project_id=' + project_id).text)
+        project = project_data['project']['name']
+        url = nomie_api_head + 'push/' + NOMIE_API_KEY + '/action=track/label=' + project + '/value=' + priority
+        print url
+        r.get(url)
     return '{"status": "success"}'
 
 if __name__ == "__main__":
