@@ -18,8 +18,8 @@ def main():
 def parse_request():
     if request.json['event_name'] == 'item:completed':
         data = request.json['event_data']
-        priority = data['priority']
-        project_id = data['project_id']
+        priority = str(data['priority'])
+        project_id = str(data['project_id'])
         project_data = json.loads(r.get('https://todoist.com/API/v7/projects/get?token=' + TODOIST_USER_TOKEN + '&project_id=' + project_id).text)
         project = project_data['project']['name']
         url = nomie_api_head + 'push/' + NOMIE_API_KEY + '/action=track/label=' + project + '/value=' + priority
