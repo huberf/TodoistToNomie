@@ -15,8 +15,8 @@ def main():
 
 @app.route("/todoist", methods=['POST'])
 def parse_request():
-    data = request.json['event_data']
-    if data['event_name'] == 'item:completed':
+    if request.json['event_name'] == 'item:completed':
+        data = request.json['event_data']
         priority = data['priority']
         project_id = data['project_id']
         project_data = json.loads(r.get('https://todoist.com/API/v7/projects/get?token=' + TODOIST_USER_TOKEN + '&project_id=' + project_id).text)
