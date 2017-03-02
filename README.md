@@ -12,3 +12,9 @@ tasks finished on Todoist with Nomie Pro via its API.
   task data.
 * Now to get the Python service running you will have to wait until I further
   embellish the instructions.
+
+## Todoist OAuth
+* First create a Todoist application in the dasbhoard (instructions coming soon).
+* Now have you user visit https://todoist.com/oauth/authorize?client_id=appId&scope=data:read&state=appSecret
+* Now take the "code" value of the redirected URL and visit POST https://todoist.com/oauth/access_token?client_id=appId&client_secret=appSecret&code=theCode
+* Now pluck the "access_token" from the response and you are ready.
