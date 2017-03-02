@@ -4,17 +4,26 @@ This Python service couples with [IFTTT](http://ifttt.com/) to allow one to sync
 tasks finished on Todoist with Nomie Pro via its API.
 
 ## Setup
-* First, login/register with IFTTT and make sure the Todoist channel has been
-  linked.
-* Now create an Applet for the event "New Completed Task" with it set to fire
-  for any project.
-* For the "then" config, we will create a placeholder Maker event to accept the
-  task data.
-* Now to get the Python service running you will have to wait until I further
-  embellish the instructions.
+* This service needs two things: a Todoist developer app key with your user
+  token and a Nomie Pro API key
+* First, you will need to follow the "Todoist Oath" instructions to get an
+  `access_token`. Once completed put this value in an environent variable called
+  `TODOIST_USER_TOKEN`.
+* Now, put your Nomie Pro API key in an environment variable called
+  `NOMIE_API_KEY`
+* Run the web.py script with Python 2.7 by executing `python web.py` in the
+  project directory.
+* Now configure your Todoist app to accept webhooks at
+  `http://[YOUR_HOST_NAME].com/todoist`
+* Live long and prosper.
 
 ## Todoist OAuth
 * First create a Todoist application in the dasbhoard (instructions coming soon).
-* Now have you user visit https://todoist.com/oauth/authorize?client_id=appId&scope=data:read&state=appSecret
-* Now take the "code" value of the redirected URL and visit POST https://todoist.com/oauth/access_token?client_id=appId&client_secret=appSecret&code=theCode
-* Now pluck the "access_token" from the response and you are ready.
+* Now insert your client_id and client_secret into the `todoist_auth.py` file.
+* Then, run `python todoist_auth.py` and follow the instructions.
+* Now pluck the "access_token" from the response and jump back to the setup
+  steps.
+
+## Contributing and Bugs
+If you spot a bug or have a feature request, feel free to open an issue, or if
+you are feeling particularly adventerous, open a PR and I'll add it in shortly.
