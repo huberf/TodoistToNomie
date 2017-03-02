@@ -18,7 +18,7 @@ def parse_request():
     rawPriority = request.form['priority']
     priority = rawPriority[9:]
     project = request.form['project']
-    url = nomie_api_head + '/push/' + NOMIE_API_KEY + '/label=' + project + '/value=' + priority
+    url = nomie_api_head + '/push/' + NOMIE_API_KEY + '/action=track/label=' + project + '/value=' + priority
     print url
     r.get(url)
     return '{"status": "success"}'
