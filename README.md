@@ -1,7 +1,6 @@
 # Todoist to Nomie
-
-This Python service couples with [IFTTT](http://ifttt.com/) to allow one to sync
-tasks finished on Todoist with Nomie Pro via its API.
+*This is a work in progress but is functional*
+This Python service couples with the [Tjjasdjflakj
 
 ## Setup
 * This service needs two things: a Todoist developer app key with your user
