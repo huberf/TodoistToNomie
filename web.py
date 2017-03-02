@@ -5,6 +5,7 @@ import requests as r
 app = Flask(__name__)
 
 NOMIE_API_KEY = os.environ.get("NOMIE_API_KEY")
+TODOIST_USER_TOKEN = os.environ.get('TODOIST_USER_TOKEN')
 print NOMIE_API_KEY
 nomie_api_head = "https://api.nomie.io/v2/"
 
@@ -14,10 +15,11 @@ def main():
 
 @app.route("/todoist", methods=['POST'])
 def parse_request():
-    content = request.form['content']
-    rawPriority = request.form['priority']
-    priority = rawPriority[9:]
-    project = request.form['project']
+    data = request.json['event_data']
+    priority = data['priority']
+    project_id = data['project']
+    project_data = json.loads(r.get('https://todoist.com/API/v7/projects/get?token=' + TODOIST_USER_TOKEN + '&project_id=' + project_id).text)
+    project = project_data['project']['name']
     url = nomie_api_head + 'push/' + NOMIE_API_KEY + '/action=track/label=' + project + '/value=' + priority
     print url
     r.get(url)
