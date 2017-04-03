@@ -5,6 +5,15 @@ from flask import request
 import requests as r
 app = Flask(__name__)
 
+####################
+# EDITABLE CONFIG  #
+####################
+
+# Change a project name to a tracker name if needed
+project_to_tacker = {
+        "C-Tips": "Work"
+        }
+
 NOMIE_API_KEY = os.environ.get("NOMIE_API_KEY")
 TODOIST_USER_TOKEN = os.environ.get('TODOIST_USER_TOKEN')
 print NOMIE_API_KEY
@@ -31,6 +40,10 @@ def parse_request():
         project_id = str(data['project_id'])
         project_data = load_project(project_id)
         project = project_data['project']['name']
+        try:
+            project = project_to_tracker[project]
+        except:
+            project = project
         tap_tracker(project, priority)
     return '{"status": "success"}'
 
