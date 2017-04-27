@@ -16,7 +16,7 @@ project_to_tacker = {
 
 NOMIE_API_KEY = os.environ.get("NOMIE_API_KEY")
 TODOIST_USER_TOKEN = os.environ.get('TODOIST_USER_TOKEN')
-print NOMIE_API_KEY
+print(NOMIE_API_KEY)
 nomie_api_head = "https://api.nomie.io/v2/"
 
 def load_project(project_id):
@@ -25,7 +25,7 @@ def load_project(project_id):
 
 def tap_tracker(name, value):
     url = nomie_api_head + 'push/' + NOMIE_API_KEY + '/action=track/label=' + name + '/value=' + value
-    print url
+    print(url)
     r.get(url)
 
 @app.route("/")
