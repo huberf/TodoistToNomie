@@ -10,7 +10,7 @@ app = Flask(__name__)
 ####################
 
 # Change a project name to a tracker name if needed
-project_to_tacker = {
+project_to_tracker = {
         "C-Tips": "Work"
         }
 
